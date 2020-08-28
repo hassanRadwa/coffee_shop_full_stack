@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'udacity-fsnd.auth0.com'
+AUTH0_DOMAIN = 'fsndtesting.eu.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'dev'
+API_AUDIENCE = 'drink'
 
 ## AuthError Exception
 '''
@@ -73,6 +73,7 @@ def get_token_auth_header():
 #     raise Exception('Not Implemented')
 
 def check_permissions(permission,payload):
+    print("in check_permissions payload: ", payload)
     if 'permissions' not in payload:
         raise AuthError({
             'code': 'invalid_claims',
@@ -81,7 +82,7 @@ def check_permissions(permission,payload):
         #abort(400)
     if permission not in payload['permissions']:
         raise AuthError({
-            'code': 'unauthorized',
+            'code': 'Forbidden',
             'description': 'Permission not found.'
         }, 403)
         #abort(403)
@@ -122,6 +123,8 @@ def verify_decode_jwt(token):
         }, 401)
 
     for key in jwks['keys']:
+        print("jwks['keys'] ",jwks['keys'])
+        print("unverified_header['kid'] ",unverified_header['kid'])
         if key['kid'] == unverified_header['kid']:
             rsa_key = {
                 'kty': key['kty'],
@@ -132,9 +135,12 @@ def verify_decode_jwt(token):
             }
     
     # Finally, verify!!!
+    print(rsa_key)
     if rsa_key:
         try:
             # USE THE KEY TO VALIDATE THE JWT
+            print("inside")
+            print(token)
             payload = jwt.decode(
                 token,
                 rsa_key,
@@ -181,7 +187,9 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
+            print(token)
             payload = verify_decode_jwt(token)
+            print(payload)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 

@@ -124,8 +124,8 @@ def getDrinksDetail(jwt):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks', methods=['POST'])
-# @requires_auth('post:drinks')
-def addDrink():
+@requires_auth('post:drinks')
+def addDrink(jwt):
 #     CREATE TABLE drink (
 #         id INTEGER NOT NULL,
 #         title VARCHAR(80),
