@@ -154,7 +154,7 @@ def editDrink(jwt,drinkId):
     if title:
         selectedDrink.title = title
     if recipe:
-        selectedDrink.recipe = recipe
+        selectedDrink.recipe = json.dumps(recipe)
     if title or recipe:
         try:
             #update the selected item 
