@@ -201,10 +201,6 @@ def editDrink(jwt,drinkId):
         "drinks": [updatedDrink[0].long()]
         }), 200
 
-
-
-    
-
 '''
 @TODO implement endpoint
     DELETE /drinks/<id>
@@ -215,6 +211,19 @@ def editDrink(jwt,drinkId):
     returns status code 200 and json {"success": True, "delete": id} where id is the id of the deleted record
         or appropriate status code indicating reason for failure
 '''
+@app.route('/drinks/<int:drinkId>', methods=['DELETE'])
+@requires_auth('delete:drinks')
+def deleteDrink(jwt,drinkId):
+    #get the selected drink
+    selectedDrink = Drink.query.filter(Drink.id == drinkId).one_or_none()
+    if selectedDrink is None:
+        abort(404)
+    #delete the selected item 
+    selectedDrink.delete()
+    return jsonify({
+    "success": True,
+    "delete": drinkId
+    }), 200
 
 
 ## Error Handling
