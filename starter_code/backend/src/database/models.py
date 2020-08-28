@@ -5,10 +5,10 @@ import json
 
 database_filename = "database.db"
 project_dir = os.path.dirname(os.path.abspath(__file__))
-print(project_dir)
+#print(project_dir)
 project_dir = project_dir.replace("\\","/")
 database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
-print(database_path)
+#print(database_path)
 
 db = SQLAlchemy()
 
@@ -17,7 +17,7 @@ setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 def setup_db(app):
-    print('Hi setup_db')
+    #print('Hi setup_db')
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app

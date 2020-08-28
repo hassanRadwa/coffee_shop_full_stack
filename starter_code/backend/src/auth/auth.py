@@ -73,7 +73,7 @@ def get_token_auth_header():
 #     raise Exception('Not Implemented')
 
 def check_permissions(permission,payload):
-    print("in check_permissions payload: ", payload)
+    #print("in check_permissions payload: ", payload)
     if 'permissions' not in payload:
         raise AuthError({
             'code': 'invalid_claims',
@@ -123,8 +123,8 @@ def verify_decode_jwt(token):
         }, 401)
 
     for key in jwks['keys']:
-        print("jwks['keys'] ",jwks['keys'])
-        print("unverified_header['kid'] ",unverified_header['kid'])
+        #print("jwks['keys'] ",jwks['keys'])
+        #print("unverified_header['kid'] ",unverified_header['kid'])
         if key['kid'] == unverified_header['kid']:
             rsa_key = {
                 'kty': key['kty'],
@@ -135,12 +135,12 @@ def verify_decode_jwt(token):
             }
     
     # Finally, verify!!!
-    print(rsa_key)
+    #print(rsa_key)
     if rsa_key:
         try:
             # USE THE KEY TO VALIDATE THE JWT
-            print("inside")
-            print(token)
+            #print("inside")
+            #print(token)
             payload = jwt.decode(
                 token,
                 rsa_key,
@@ -187,9 +187,9 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            print(token)
+            #print(token)
             payload = verify_decode_jwt(token)
-            print(payload)
+            #print(payload)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 
