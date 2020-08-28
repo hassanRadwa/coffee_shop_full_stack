@@ -53,14 +53,14 @@ class Drink(db.Model):
     def short(self):
         #print('in short')
         #print(json.loads(self.recipe))
-        #short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
-        recipe_dict = json.loads(self.recipe)
+        short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        # recipe_dict = json.loads(self.recipe)
         # short_recipe = []
         # print("len(self.recipe) ",len(self.recipe))
         # recipeLen = len(self.recipe)
         # print("recipeLen ",recipeLen)
         # if recipeLen == 1:
-        short_recipe = [{'color': recipe_dict.get('color'), 'parts': recipe_dict.get('parts')}]
+        # short_recipe = [{'color': recipe_dict.get('color'), 'parts': recipe_dict.get('parts')}]
         # elif recipeLen > 1:
         #     for i in range(recipeLen):
         #         short_recipe.append({'color': recipe_dict[i].get('color'), 'parts': recipe_dict[i].get('parts')})

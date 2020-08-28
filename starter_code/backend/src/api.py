@@ -71,19 +71,19 @@ def getDrinks():
     #     drinks.append(drink)
     # for dicts in drinks_db:
     #     print(dicts['title'])
-    print(len(drinks_db))
-    print(type(drinks_db[0]))
-    print(type(drinks_db[0].recipe))
-    tmp = json.loads(drinks_db[0].recipe)
-    print(type(tmp))
-    print('color:', tmp.get('color'))
-    print('parts:', tmp.get('parts'))
+    # print(len(drinks_db))
+    # print(type(drinks_db[0]))
+    # print(type(drinks_db[0].recipe))
+    # tmp = json.loads(drinks_db[0].recipe)
+    # print(type(tmp))
+    # print('color:', tmp.get('color'))
+    # print('parts:', tmp.get('parts'))
     # for r in json.loads(drinks_db[0].recipe):
     #     print('type(r):', type(r))
     #     print('r:', r)
     #     print('color:', r[0])
     #     print('parts:', r[1])
-    print(drinks_db[0].short())
+    # print(drinks_db[0].short())
 
     for i in range(len(drinks_db)):
         drinks.append(drinks_db[i].short())
@@ -124,7 +124,7 @@ def getDrinksDetail(jwt):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks', methods=['POST'])
-@requires_auth('post:drinks')
+# @requires_auth('post:drinks')
 def addDrink():
 #     CREATE TABLE drink (
 #         id INTEGER NOT NULL,
