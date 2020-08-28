@@ -146,7 +146,7 @@ def addDrink():
     #get the newly created drink
     print("newDrink.id")
     print(newDrink.id)
-    #newAddedDrink = Drink.query.filter(Drink.id == newDrink.id).all()
+    newAddedDrink = Drink.query.filter(Drink.id == newDrink.id).all()
     #print("type")
     #print(type(newAddedDrink))
     #print("newAddedDrink")
@@ -160,7 +160,7 @@ def addDrink():
     # print(newAddedDrink)
     return jsonify({
         "success": True,
-        "drinks": [newDrink.long()]
+        "drinks": [newAddedDrink[0].long()]
     }), 200
 
 '''
