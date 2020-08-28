@@ -91,6 +91,7 @@ export class DrinksService {
   }
 
   getDrinks() {
+    console.log("getDrinks");
     if (this.auth.can('get:drinks-detail')) {
       this.http.get(this.url + '/drinks-detail', this.getHeaders())
       .subscribe((res: any) => {
@@ -101,6 +102,7 @@ export class DrinksService {
       this.http.get(this.url + '/drinks', this.getHeaders())
       .subscribe((res: any) => {
         this.drinksToItems(res.drinks);
+        console.log("res");
         console.log(res);
       });
     }

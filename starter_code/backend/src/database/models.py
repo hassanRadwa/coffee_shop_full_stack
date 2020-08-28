@@ -5,7 +5,10 @@ import json
 
 database_filename = "database.db"
 project_dir = os.path.dirname(os.path.abspath(__file__))
+print(project_dir)
+project_dir = project_dir.replace("\\","/")
 database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+print(database_path)
 
 db = SQLAlchemy()
 
@@ -14,6 +17,7 @@ setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 def setup_db(app):
+    print('Hi setup_db')
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
@@ -47,8 +51,20 @@ class Drink(db.Model):
         short form representation of the Drink model
     '''
     def short(self):
-        print(json.loads(self.recipe))
-        short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        #print('in short')
+        #print(json.loads(self.recipe))
+        #short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        recipe_dict = json.loads(self.recipe)
+        # short_recipe = []
+        # print("len(self.recipe) ",len(self.recipe))
+        # recipeLen = len(self.recipe)
+        # print("recipeLen ",recipeLen)
+        # if recipeLen == 1:
+        short_recipe = [{'color': recipe_dict.get('color'), 'parts': recipe_dict.get('parts')}]
+        # elif recipeLen > 1:
+        #     for i in range(recipeLen):
+        #         short_recipe.append({'color': recipe_dict[i].get('color'), 'parts': recipe_dict[i].get('parts')})
+        
         return {
             'id': self.id,
             'title': self.title,
