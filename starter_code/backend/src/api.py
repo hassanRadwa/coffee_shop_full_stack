@@ -56,8 +56,8 @@ db_drop_and_create_all()
 def getDrinks():
     try:
         drinks_db = Drink.query.all()
-        if len(drinks_db) == 0:
-            abort(404)
+        # if len(drinks_db) == 0:
+        #     abort(404)
         drinks = []
         for i in range(len(drinks_db)):
             drinks.append(drinks_db[i].short())
@@ -86,8 +86,8 @@ def getDrinksDetail(jwt):
     try:
         # unpack the request headers
         drinks_db = Drink.query.all()
-        if len(drinks_db) == 0:
-            abort(404)
+        # if len(drinks_db) == 0:
+        #     abort(404)
 
         # print(drinks_db)
         drinks = []
