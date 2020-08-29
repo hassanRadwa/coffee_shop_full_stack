@@ -13,3 +13,8 @@ test.db
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Backend Database #
+####################
+backend/src/database/node_modules
+backend/src/database/package-lock.json
